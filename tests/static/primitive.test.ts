@@ -9,80 +9,33 @@
 
 describe("toBeについて検証する", () => {
   test("文字列について", () => {
-    // 準備(Arrange)
-    const expectedValue = "hello";
-    const result = "hello";
-
-    // 実行(Act)
-
-    // 確認(Assert)
-    expect(result).toBe(expectedValue);
+    expect("hello").toBe("hello");
   });
 
   test("数値について", () => {
-    // 準備(Arrange)
-    const expectedValue = 123;
-    const result = 123;
-
-    // 実行(Act)
-
-    // 確認(Assert)
-    expect(result).toBe(expectedValue);
+    expect(123).toBe(123);
   });
 
   test("ブーリアンについて", () => {
-    // 準備(Arrange)
-    const expectedValue = true;
-    const result = true;
-
-    // 実行(Act)
-
-    // 確認(Assert)
-    expect(result).toBe(expectedValue);
+    expect(true).toBe(true);
   });
 
   test("nullについて", () => {
-    // 準備(Arrange)
-    const expectedValue = null;
-    const result = null;
-
-    // 実行(Act)
-
-    // 確認(Assert)
-    expect(result).toBe(expectedValue);
+    expect(null).toBe(null);
   });
 
   test("undefinedについて", () => {
-    // 準備(Arrange)
-    const expectedValue = undefined;
-    const result = undefined;
-
-    // 実行(Act)
-
-    // 確認(Assert)
-    expect(result).toBe(expectedValue);
+    expect(undefined).toBe(undefined);
   });
 
   test("BigIntについて", () => {
-    // 準備(Arrange)
-    const expectedValue = BigInt(10);
-    const result = BigInt(10);
-
-    // 実行(Act)
-
-    // 確認(Assert)
-    expect(result).toBe(expectedValue);
+    expect(BigInt(10)).toBe(BigInt(10));
   });
 
   test("Symbolについて", () => {
-    // 準備(Arrange)
     const s1 = Symbol("test");
     const s2 = s1;
     const s3 = Symbol("test");
-
-    // 実行(Act)
-
-    // 確認(Assert)
     expect(s1).toBe(s2);
     expect(s1).not.toBe(s3); // Symbols are unique
   });
@@ -90,80 +43,34 @@ describe("toBeについて検証する", () => {
 
 describe("toEqualについて検証する", () => {
   test("文字列について", () => {
-    // 準備(Arrange)
-    const expectedValue = "hello";
-    const result = "hello";
-
-    // 実行(Act)
-
-    // 確認(Assert)
-    expect(result).toEqual(expectedValue);
+    expect("hello").toEqual("hello");
   });
 
   test("数値について", () => {
-    // 準備(Arrange)
-    const expectedValue = 123;
-    const result = 123;
-
-    // 実行(Act)
-
-    // 確認(Assert)
-    expect(result).toEqual(expectedValue);
+    expect(123).toEqual(123);
   });
 
   test("ブーリアンについて", () => {
-    // 準備(Arrange)
-    const expectedValue = true;
-    const result = true;
-
-    // 実行(Act)
-
-    // 確認(Assert)
-    expect(result).toEqual(expectedValue);
+    expect(true).toEqual(true);
   });
 
   test("nullについて", () => {
-    // 準備(Arrange)
-    const expectedValue = null;
-    const result = null;
-
-    // 実行(Act)
-
-    // 確認(Assert)
-    expect(result).toEqual(expectedValue);
+    expect(null).toEqual(null);
   });
 
   test("undefinedについて", () => {
-    // 準備(Arrange)
-    const expectedValue = undefined;
-    const result = undefined;
-
-    // 実行(Act)
-
-    // 確認(Assert)
-    expect(result).toEqual(expectedValue);
+    expect(undefined).toEqual(undefined);
   });
 
   test("BigIntについて", () => {
-    // 準備(Arrange)
-    const expectedValue = BigInt(10);
-    const result = BigInt(10);
-
-    // 実行(Act)
-
-    // 確認(Assert)
-    expect(result).toEqual(expectedValue);
+    expect(BigInt(10)).toEqual(BigInt(10));
   });
 
   test("Symbolについて", () => {
-    // 準備(Arrange)
     const s1 = Symbol("test");
     const s2 = s1;
     const s3 = Symbol("test");
 
-    // 実行(Act)
-
-    // 確認(Assert)
     expect(s1).toEqual(s2);
     expect(s1).not.toEqual(s3); // Symbols are unique
   });
