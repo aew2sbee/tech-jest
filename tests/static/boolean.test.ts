@@ -34,4 +34,16 @@ describe("Jestの真偽値マッチャーの検証", () => {
       expect(undefined).not.toBeDefined();
     });
   });
+
+  describe("その他の無効な演算および処理", () => {
+    test("-1の平方根", () => {
+      expect(Math.sqrt(-1)).toBeNaN();
+    });
+    test("無限大と0の乗算", () => {
+      expect(Infinity * 0).toBeNaN();
+    });
+    test("数字以外の文字列を数値としてパース", () => {
+      expect(parseInt("foo")).toBeNaN();
+    });
+  });
 });
