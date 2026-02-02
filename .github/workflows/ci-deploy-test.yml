@@ -1,0 +1,35 @@
+name: Test and Deploy Report
+
+on:
+  push:
+    branches:
+      - main # mainブランチにプッシュされた時に実行
+    paths:
+      - 'tests/**'
+permissions:
+  contents: write # ページ公開用ブランチへの書き込み権限
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./html-report # Jestの設定で指定した保存先
