@@ -22,7 +22,7 @@ const config: Config = {
     [
       "jest-html-reporters",
       {
-        publicPath: "./html-report",
+        publicPath: "./output/html-report",
         filename: "index.html",
         expand: true,
       },
