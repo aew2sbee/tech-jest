@@ -6,9 +6,9 @@ on:
     branches:
       - '**'
     paths:
-          - 'src/**'
-          - 'test/**'
-          - 'jest.config.ts' # 設定ファイル変更時も走らせるのが安全です
+      - 'src/**'
+      - 'test/**'
+      - 'jest.config.ts' # 設定ファイル変更時も走らせるのが安全です
 
 permissions:
   contents: write
