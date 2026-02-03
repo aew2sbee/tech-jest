@@ -1,0 +1,26 @@
+version: 2
+updates:
+  # npm (Node.jsのパッケージマネージャー) の依存関係をチェック
+  - package-ecosystem: "npm"
+    # パッケージマニフェスト (package.json) がある場所
+    directory: "/"
+    # 更新をチェックする頻度
+    schedule:
+      interval: "weekly" # 週に一度
+    # npmの依存関係に対するオープンなプルリクエストの最大数
+    open-pull-requests-limit: 10
+    # すべてのnpm依存関係を単一のプルリクエストにまとめる
+    groups:
+      npm-dependencies:
+        patterns:
+          - "*"
+
+  # GitHub Actionsの依存関係をチェック
+  - package-ecosystem: "github-actions"
+    # ワークフローファイル (.yml) がある場所
+    directory: "/"
+    # 更新をチェックする頻度
+    schedule:
+      interval: "weekly" # 週に一度
+    # GitHub Actionsの依存関係に対するオープンなプルリクエストの最大数
+    open-pull-requests-limit: 5
