@@ -122,3 +122,69 @@ describe("外部モジュール（axios.ts）のモック化", () => {
     expect(User.searchUser).toHaveBeenCalledTimes(2);
   });
 });
+
+// jest.spyOn のサンプルテストコード
+
+// jest.mock と jest.spyOn は異なる目的で使用されます。
+// jest.mock はモジュール全体または一部を置き換える（モックする）のに対し、
+// jest.spyOn は既存のオブジェクトのメソッドを監視し、その呼び出しを追跡したり、
+// 一時的に実装を変更したりします。jest.spyOn は元の実装を保持するため、
+// 部分的なモック（partial mock）に適しています。
+// 以下のテストでは、jest.mock の影響を受けないように、
+// jest.requireActual を使って実際の User クラスをインポートし、
+// それに対して jest.spyOn を適用しています。
+// このため、User と ActualUserClass は異なる参照を持ちます。
+
+import { default as ActualUserClass } from "../../src/server/api/axios";
+
+describe("jest.spyOn の使用例 (実際のメソッドに対して)", () => {
+  let userSearchSpy: jest.SpyInstance;
+
+  beforeEach(() => {
+    // 他のテストによる呼び出し履歴をクリアする
+    (ActualUserClass.searchUser as jest.Mock).mockClear();
+
+    // ActualUserClassの静的メソッドsearchUserをスパイ
+    // これにより、実際のメソッドの呼び出しを監視し、必要に応じて一時的に振る舞いを変更できる
+    userSearchSpy = jest.spyOn(ActualUserClass, "searchUser");
+
+    // 初期モック実装を設定（通常のsearchUserの振る舞いを模倣）
+    userSearchSpy.mockResolvedValue({ id: 200, name: "Spied User" });
+  });
+
+  afterEach(() => {
+    // 各テストの後にスパイを復元する
+    // これにより、他のテストに影響を与えず、元の実装に戻る
+    userSearchSpy.mockRestore();
+  });
+
+  test("searchUserが呼び出されたことを監視できる", async () => {
+    // 実際のsearchUserを呼び出す
+    const user = await ActualUserClass.searchUser();
+
+    // スパイが1回呼び出されたことを確認
+    expect(userSearchSpy).toHaveBeenCalledTimes(1);
+    expect(userSearchSpy).toHaveBeenCalledWith(); // 引数なしで呼ばれたことを確認
+
+    // モックされた値が返されることを確認
+    expect(user).toEqual({ id: 200, name: "Spied User" });
+  });
+
+  test("searchUserの特定の呼び出しで異なる結果を返すことができる", async () => {
+    // 一度だけ異なる結果を返すように設定
+    userSearchSpy.mockResolvedValueOnce({
+      id: 201,
+      name: "One-time Spied User",
+    });
+
+    // 1回目の呼び出し
+    const user1 = await ActualUserClass.searchUser();
+    expect(user1).toEqual({ id: 201, name: "One-time Spied User" });
+    expect(userSearchSpy).toHaveBeenCalledTimes(1);
+
+    // 2回目の呼び出し（mockResolvedValueOnceが消費されたので、デフォルトのモック実装に戻る）
+    const user2 = await ActualUserClass.searchUser();
+    expect(user2).toEqual({ id: 200, name: "Spied User" });
+    expect(userSearchSpy).toHaveBeenCalledTimes(2);
+  });
+});
