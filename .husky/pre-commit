@@ -1,11 +1,1 @@
-# .husky/pre-commit
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-# 1. TypeScriptの型チェック (プロジェクト全体)
-echo "🔍 型チェックを実行中..."
-npx tsc --noEmit
-
-# 2. 変更されたファイルに対してLint等を実行
-echo "💅 lint-stagedを実行中..."
-npx lint-staged
+pnpm test
