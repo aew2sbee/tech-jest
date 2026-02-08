@@ -1,4 +1,4 @@
-# tech-jest
+# poc-jest
 [Jest](https://jestjs.io/)について検証する
 
 ## GitHub Pages

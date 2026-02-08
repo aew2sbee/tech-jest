@@ -1,15 +1,12 @@
 import type { Config } from "jest";
 
 const config: Config = {
-  preset: "ts-jest/presets/default-esm",
+  preset: "ts-jest",
   testEnvironment: "node",
-  extensionsToTreatAsEsm: [".ts"],
   transform: {
-    // ts-jestの設定も型安全に記述できます
     "^.+\\.ts$": [
       "ts-jest",
       {
-        useESM: true,
         tsconfig: "tsconfig.json",
       },
     ],
